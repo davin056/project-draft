@@ -108,5 +108,5 @@ class Rumus : public Welcome{
 int main() {
     Rumus rms;
 
-    return 0;
+    return 1;
 }
