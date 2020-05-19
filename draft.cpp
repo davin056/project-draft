@@ -6,93 +6,107 @@
 using namespace std;
 
 class Welcome {
-	private :
-		string uname;
+    private :
+        string uname;
 
-	public : 
-		Welcome() {
-		    ofstream operate;
+    public : 
+        Welcome() {
+            ofstream operate;
 
-		    operate.open("user.txt");
+            operate.open("user.txt");
 
-		    cout << endl;
-		    cout << "             -------------------------------------------------------------------------" << endl;
-			cout << "                                   Selamat datang di Kalkulator!                      " <<endl;
-			cout << "             -------------------------------------------------------------------------" << endl;
-		    cout << "               Silahkan Masukkan Username : ";
-		    getline(cin, uname);
+            cout << endl;
+            cout << "             -------------------------------------------------------------------------" << endl;
+            cout << "                                   Selamat datang di Kalkulator!                      " <<endl;
+            cout << "             -------------------------------------------------------------------------" << endl;
+            cout << "               Silahkan Masukkan Nama Anda : ";
+            getline(cin, uname);
 
-		    if(!operate.fail()) {
-		       	operate << "Username : " << uname << endl;
-			    operate.close();
-			    cout << endl;
-		    }
+            if(!operate.fail()) {
+                operate << "Username : " << uname << endl;
+                operate.close();
+                cout << endl;
+            }
 
-		    ifstream yourfile;
+            ifstream yourfile;
 
-		    yourfile.open("user.txt");
-		}
+            yourfile.open("user.txt");
+        }
 
-		~Welcome() {
-			cout << "               Terima Kasih, " << uname << ", semoga harimu menyenangkan." << endl;
+        ~Welcome() {
+            cout << "               Terima Kasih, " << uname << ", semoga harimu menyenangkan." << endl;
 
-		}
+        }
 
 };
 
 class Rumus : public Welcome{
-	private :
-		float bil1, bil2, hsl;
-		char oper;
+    private :
+        float bil1, bil2, hsl;
+        char oper;
 
-	public :
-		Rumus(){
-			cout << "               Jenis Operasi (+ / - / x / : / ^ )? "; cin >> oper;
-			cout << "               Bilangan = "; cin >> bil1;
+    public :
+        Rumus(){
+            operasi :
+                cout << "               Jenis Operasi ( + | - | x or * | : or / | ^ )? "; cin >> oper;
 
-			rumus :
-				if(oper == '+'){
-					cout << "               Bilangan = "; cin >> bil2;
-					hsl = bil1 + bil2;
-				}
-				else if(oper == '-'){
-					cout << "               Bilangan = "; cin >> bil2;
-					hsl = bil1 - bil2;				
-				}
-				else if(oper == 'x'){
-					cout << "               Bilangan = "; cin >> bil2;
-					hsl = bil1 * bil2;				
-				}
-				else if(oper == ':'){
-					cout << "               Bilangan = "; cin >> bil2;
-					hsl = bil1 / bil2;			
-				}
-				else if(oper == '^'){
-					cout << "               Pangkat  = "; cin >> bil2;
-					hsl = pow(bil1, bil2);
-				}
-				else{
-					cout << "               Operasi tidak tersedia." << endl;
-				}
+            if(oper == '+' | oper == '-' | oper == 'x' | oper == '*' | oper == ':' | oper == '^'){
+                input :
+                    cout << "               Bilangan = "; cin >> bil1;
 
-			while(oper != '='){
-				cout << "\n               Jenis Operasi (+ / - / x / : / ^ / =)? "; cin >> oper;
-					if(oper == '='){
-						goto akhir;
-					}
-				cout << "               Hasil    = " << hsl << endl;
+                rumus :
+                    if(oper == '+'){
+                        cout << "               Bilangan = "; cin >> bil2;
+                        hsl = bil1 + bil2;
+                    }
+                    else if(oper == '-'){
+                        cout << "               Bilangan = "; cin >> bil2;
+                        hsl = bil1 - bil2;              
+                    }
+                    else if(oper == 'x' | oper == '*'){
+                        cout << "               Bilangan = "; cin >> bil2;
+                        hsl = bil1 * bil2;              
+                    }
+                    else if(oper == ':'){
+                        cout << "               Bilangan = "; cin >> bil2;
+                        hsl = bil1 / bil2;          
+                    }
+                    else if(oper == '^'){
+                        cout << "               Pangkat  = "; cin >> bil2;
+                        hsl = pow(bil1, bil2);
+                    }
 
-				bil1 = hsl;
-				goto rumus;
-			}
+                while(oper != '='){
+                    cout << "\n               Jenis Operasi ( + | - | x or * | : or / | ^ | = )? "; cin >> oper;
 
-		akhir:
-			cout << "               Hasil Akhir = " << hsl << endl;
-		}
+                    if(oper == '+' | oper == '-' | oper == 'x' | oper == ':' | oper == '^'){
+                        cout << "               Hasil    = " << hsl << endl;
+
+                        bil1 = hsl;
+                        goto rumus;
+                    }
+                    else if(oper == '='){
+                        goto akhir;
+                    }
+                    else{
+                        cout << "               Operasi tidak tersedia." << endl;
+                    }
+                }
+
+                akhir:
+                    cout << "               Hasil Akhir = " << hsl << endl << endl;
+            }
+            else{
+                cout << "               Operasi tidak tersedia." << endl << endl;
+
+                goto operasi;
+                goto input;
+            }
+        }
 };
 
 int main() {
-	Rumus rms;
+    Rumus rms;
 
-	return 0;
-} 
+    return 0;
+}
