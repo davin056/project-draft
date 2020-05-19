@@ -94,5 +94,5 @@ class Rumus : public Welcome{
 int main() {
 	Rumus rms;
 
-	return 1;
+	return 0;
 } 
