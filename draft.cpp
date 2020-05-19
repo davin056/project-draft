@@ -50,7 +50,7 @@ class Rumus : public Welcome{
             operasi :
                 cout << "               Jenis Operasi ( + | - | x or * | : or / | ^ )? "; cin >> oper;
 
-            if(oper == '+' | oper == '-' | oper == 'x' | oper == '*' | oper == ':' | oper == '^'){
+            if(oper == '+' | oper == '-' | oper == 'x' | oper == '*' | oper == ':' | oper == '/' | oper == '^'){
                 input :
                     cout << "               Bilangan = "; cin >> bil1;
 
@@ -79,7 +79,7 @@ class Rumus : public Welcome{
                 while(oper != '='){
                     cout << "\n               Jenis Operasi ( + | - | x or * | : or / | ^ | = )? "; cin >> oper;
 
-                    if(oper == '+' | oper == '-' | oper == 'x' | oper == ':' | oper == '^'){
+                    if(oper == '+' | oper == '-' | oper == 'x' | oper == '*' | oper == ':' | oper == '/' | oper == '^'){
                         cout << "               Hasil    = " << hsl << endl;
 
                         bil1 = hsl;
@@ -107,6 +107,7 @@ class Rumus : public Welcome{
 
 int main() {
     Rumus rms;
+    getch();
 
     return 0;
 }
