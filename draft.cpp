@@ -3,14 +3,14 @@
 #include <fstream>
 #include <string>
 #include <cmath>
-#include <windows.h> // StdSetCursorPosition
 using namespace std;
 
 class Welcome {
-    private :
-        string uname;
+    protected :
+        string uname, oper;
+        float bil1, bil2, hsl;
 
-    public : 
+    public :
         Welcome() {
             ofstream operate;
 
@@ -39,22 +39,20 @@ class Welcome {
             getch();
         }
 
+        virtual void Hitung() = 0;
+
 };
 
 class Rumus : public Welcome{
-    private :
-        float bil1, bil2, hsl;
-        string oper;
-
     public :
-        Rumus(){
+        void Hitung(){
             try{
                 operasi :
                     cout << "               Jenis Operasi ( + | - | x or * | : or / | ^ | sin | cos | tan )? "; getline(cin, oper);
 
                 if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^" | oper == "sin" | oper == "cos" | oper == "tan"){
                     if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^"){
-                        input1 :
+                        input :
                             cout << "               Bilangan    = "; cin >> bil1;
 
                         rumus :
@@ -130,7 +128,7 @@ class Rumus : public Welcome{
                     cout << "               Operasi tidak tersedia." << endl << endl;
 
                     goto operasi;
-                    goto input1;
+                    goto input;
                 }
             }
             catch(exception& e){
@@ -140,7 +138,11 @@ class Rumus : public Welcome{
 };
 
 int main(){
+    Welcome *wlc;
     Rumus rms;
+
+    wlc = &rms;
+    wlc -> Hitung();
 
     return 0;
 }
