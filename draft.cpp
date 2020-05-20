@@ -3,15 +3,16 @@
 #include <fstream>
 #include <string>
 #include <cmath>
+#include <windows.h> // StdSetCursorPosition
 using namespace std;
 
-class Welcome {
+class Welcome{
     protected :
         string uname, oper;
         float bil1, bil2, hsl;
 
     public :
-        Welcome() {
+        Welcome(){
             ofstream operate;
 
             operate.open("user.txt");
@@ -22,6 +23,7 @@ class Welcome {
             cout << "             --------------------------------------------------------------------------" << endl;
             cout << "               Silahkan Masukkan Nama Anda : ";
             getline(cin, uname);
+            system("cls");
 
             if(!operate.fail()) {
                 operate << "Username : " << uname << endl;
@@ -34,18 +36,27 @@ class Welcome {
             yourfile.open("user.txt");
         }
 
-        ~Welcome() {
-            cout << "               Terima Kasih, " << uname << ", semoga harimu menyenangkan." << endl;
+        ~Welcome(){
+            cout << "             --------------------------------------------------------------------------" << endl;
+            cout << "                     Terima Kasih, " << uname << ", semoga harimu menyenangkan.        " << endl;
+            cout << "             --------------------------------------------------------------------------" << endl;
             getch();
         }
 
-        virtual void Hitung() = 0;
+        virtual void Kalkulator() = 0;
+        virtual void Kalkulator(float bil1, float bil2, float hsl, string oper) = 0;
 
 };
 
 class Rumus : public Welcome{
     public :
-        void Hitung(){
+        void Kalkulator(){
+            cout << "             --------------------------------------------------------------------------" << endl;
+            cout << "                                   Selamat Menggunakan Kalkulator                      " << endl;
+            cout << "             --------------------------------------------------------------------------" << endl << endl;
+        }
+
+        void Kalkulator(float bil1, float bil2, float hsl, string oper){
             try{
                 operasi :
                     cout << "               Jenis Operasi ( + | - | x or * | : or / | ^ | sin | cos | tan )? "; getline(cin, oper);
@@ -138,11 +149,15 @@ class Rumus : public Welcome{
 };
 
 int main(){
+    string oper;
+    float bil1, bil2, hsl;
+
     Welcome *wlc;
     Rumus rms;
 
     wlc = &rms;
-    wlc -> Hitung();
+    wlc -> Kalkulator();
+    wlc -> Kalkulator(bil1, bil2, hsl, oper);
 
     return 0;
 }
