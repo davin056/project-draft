@@ -3,13 +3,11 @@
 #include <fstream>
 #include <string>
 #include <cmath>
-#include <windows.h> // StdSetCursorPosition
 using namespace std;
 
 class Welcome{
     protected :
-        string uname, oper;
-        float bil1, bil2, hsl;
+        string uname;;
 
     public :
         Welcome(){
@@ -48,6 +46,8 @@ class Welcome{
 
 };
 
+template <class A, class B>
+
 class Rumus : public Welcome{
     public :
         void Kalkulator(){
@@ -56,7 +56,7 @@ class Rumus : public Welcome{
             cout << "             --------------------------------------------------------------------------" << endl << endl;
         }
 
-        void Kalkulator(float bil1, float bil2, float hsl, string oper){
+        void Kalkulator(A bil1, A bil2, A hsl, B oper){
             try{
                 operasi :
                     cout << "               Jenis Operasi ( + | - | x or * | : or / | ^ | sin | cos | tan )? "; getline(cin, oper);
@@ -153,7 +153,7 @@ int main(){
     float bil1, bil2, hsl;
 
     Welcome *wlc;
-    Rumus rms;
+    Rumus<float, string> rms;
 
     wlc = &rms;
     wlc -> Kalkulator();
