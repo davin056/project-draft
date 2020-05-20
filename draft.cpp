@@ -7,7 +7,7 @@ using namespace std;
 
 class Welcome{
     protected :
-        string uname;;
+        string uname;
 
     public :
         Welcome(){
