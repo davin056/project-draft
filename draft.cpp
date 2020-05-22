@@ -117,9 +117,8 @@ class Rumus : public Welcome{
                             }
                             else if(oper == "="){
                                 cout << "               Hasil Akhir = " << hsl << endl << endl;
-
                                 tanya :   
-                                    cout << "               Apakah Anda ingin melakukan perhitungan kembali (Y/G)? "; getline(cin, pil);
+                                    cout << "               Apakah Anda ingin melakukan perhitungan kembali (Y/G)? "; cin >> pil; 
                                     cout << endl;
 
                                     if(pil == "Y" | pil == "y"){
