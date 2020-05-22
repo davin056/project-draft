@@ -154,11 +154,14 @@ class Rumus : public Welcome{
             }
             catch(exception& e){
                 cout << "               Hasil Akhir = " << hsl << endl << endl;
+                cout << "             --------------------------------------------------------------------------" << endl;
             }
         }
 };
 
 int main(){
+    system("cls");
+    system("color 09");
     string oper, pil;
     float bil1, bil2, hsl;
 
