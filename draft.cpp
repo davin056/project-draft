@@ -125,7 +125,7 @@ class Rumus : public Welcome{
                                     if(pil == "Y" | pil == "y"){
                                         goto operasi;
                                     }
-                                    else if(pil == "G"){
+                                    else if(pil == "G" | pil == "g"){
                                         goto akhir;
                                     }
                                     else{
