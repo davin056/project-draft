@@ -157,7 +157,17 @@ int main(){
 
     wlc = &rms;
     wlc -> Kalkulator();
+      balik:
     wlc -> Kalkulator(bil1, bil2, hsl, oper);
 
+    cout << "Apakah anda masih menggunakan kalkulator? (y/t) : ";
+    cin >> yt;
+    if (yt == 'y') {
+      goto balik;
+    } else if (yt == 't'){
+      goto end;
+    }
+
+    end:
     return 0;
 }
