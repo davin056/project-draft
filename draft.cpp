@@ -35,14 +35,13 @@ class Welcome{
         }
 
         ~Welcome(){
-            cout << "             --------------------------------------------------------------------------" << endl;
             cout << "                     Terima Kasih, " << uname << ", semoga harimu menyenangkan.        " << endl;
             cout << "             --------------------------------------------------------------------------" << endl;
             getch();
         }
 
         virtual void Kalkulator() = 0;
-        virtual void Kalkulator(float bil1, float bil2, float hsl, string oper) = 0;
+        virtual void Kalkulator(float bil1, float bil2, float hsl, string oper, string pil) = 0;
 
 };
 
@@ -56,7 +55,7 @@ class Rumus : public Welcome{
             cout << "             --------------------------------------------------------------------------" << endl << endl;
         }
 
-        void Kalkulator(A bil1, A bil2, A hsl, B oper){
+        void Kalkulator(A bil1, A bil2, A hsl, B oper, B pil){
             try{
                 operasi :
                     cout << "               Jenis Operasi ( + | - | x or * | : or / | ^ | sin | cos | tan )? "; getline(cin, oper);
@@ -117,7 +116,21 @@ class Rumus : public Welcome{
                                 goto rumus;
                             }
                             else if(oper == "="){
-                                goto akhir;
+                                cout << "               Hasil Akhir = " << hsl << endl << endl;
+
+                                tanya :   
+                                    cout << "               Apakah Anda ingin melakukan perhitungan kembali (Y/G)? "; getline(cin, pil);
+                                    cout << endl;
+
+                                    if(pil == "Y" | pil == "y"){
+                                        goto operasi;
+                                    }
+                                    else if(pil == "G"){
+                                        goto akhir;
+                                    }
+                                    else{
+                                        goto tanya;
+                                    }
                             }
                             else if(oper == "sin" | oper == "cos" | oper == "tan"){
                                 bil2 = hsl;
@@ -131,15 +144,13 @@ class Rumus : public Welcome{
                     else{
                         throw range_error("range_error");
                     }
-
                     akhir:
-                        cout << "               Hasil Akhir = " << hsl << endl << endl;
+                        cout << "             --------------------------------------------------------------------------" << endl;          
                 }
                 else{
                     cout << "               Operasi tidak tersedia." << endl << endl;
 
                     goto operasi;
-                    goto input;
                 }
             }
             catch(exception& e){
@@ -149,7 +160,7 @@ class Rumus : public Welcome{
 };
 
 int main(){
-    string oper;
+    string oper, pil;
     float bil1, bil2, hsl;
 
     Welcome *wlc;
@@ -157,17 +168,7 @@ int main(){
 
     wlc = &rms;
     wlc -> Kalkulator();
-      balik:
-    wlc -> Kalkulator(bil1, bil2, hsl, oper);
+    wlc -> Kalkulator(bil1, bil2, hsl, oper, pil);
 
-    cout << "Apakah anda masih menggunakan kalkulator? (y/t) : ";
-    cin >> yt;
-    if (yt == 'y') {
-      goto balik;
-    } else if (yt == 't'){
-      goto end;
-    }
-
-    end:
     return 0;
 }
