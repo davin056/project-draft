@@ -191,7 +191,7 @@ class Rumus : public Welcome {
 int main() {
 
     system("cls");
-    system("color 03");
+    system("color 06");
     string oper, pil;
     float bil1, bil2, hsl;
 
