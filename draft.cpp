@@ -18,7 +18,7 @@ class Welcome {
 
             cout << endl;
             cout << "\t\t ----------------------------------------------------------------------------" << endl;
-            cout << "\t\t\t\t\t Selamat datang di Kalkulator !" << endl;
+            cout << "\t\t\t\t\t Selamat Datang Di Kalkulator !" << endl;
             cout << "\t\t ----------------------------------------------------------------------------" << endl;
             cout << "\t\t Silahkan masukkan nama anda : ";
             getline(cin, uname);
@@ -52,7 +52,7 @@ class Rumus : public Welcome {
     public :
         void Kalkulator() {
             cout << "\t\t ----------------------------------------------------------------------------" << endl;
-            cout << "\t\t\t\t\t Selamat menggunakan Kalkulator" << endl;
+            cout << "\t\t\t\t\t Selamat Menggunakan Kalkulator" << endl;
             cout << "\t\t ----------------------------------------------------------------------------" << endl << endl;
         }
 
