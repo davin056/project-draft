@@ -3,23 +3,24 @@
 #include <fstream>
 #include <string>
 #include <cmath>
+
 using namespace std;
 
-class Welcome{
+class Welcome {
     protected :
         string uname;
 
     public :
-        Welcome(){
+        Welcome() {
             ofstream operate;
 
             operate.open("user.txt");
 
             cout << endl;
-            cout << "             --------------------------------------------------------------------------" << endl;
-            cout << "                                   Selamat datang di Kalkulator !                      " << endl;
-            cout << "             --------------------------------------------------------------------------" << endl;
-            cout << "               Silahkan Masukkan Nama Anda : ";
+            cout << "\t\t ----------------------------------------------------------------------------" << endl;
+            cout << "\t\t\t\t\t Selamat datang di Kalkulator !" << endl;
+            cout << "\t\t ----------------------------------------------------------------------------" << endl;
+            cout << "\t\t Silahkan masukkan nama anda : ";
             getline(cin, uname);
             system("cls");
 
@@ -34,10 +35,10 @@ class Welcome{
             yourfile.open("user.txt");
         }
 
-        ~Welcome(){
-            cout << "                     Terima Kasih, " << uname << ", semoga harimu menyenangkan.        " << endl;
-            cout << "             --------------------------------------------------------------------------" << endl;
-            getch();
+        ~Welcome() {
+            cout << "\t\t\t\t Terima kasih " << uname << " semoga harimu menyenangkan" << endl;
+            cout << "\t\t ----------------------------------------------------------------------------" << endl;
+            // getch();
         }
 
         virtual void Kalkulator() = 0;
@@ -47,121 +48,150 @@ class Welcome{
 
 template <class A, class B>
 
-class Rumus : public Welcome{
+class Rumus : public Welcome {
     public :
-        void Kalkulator(){
-            cout << "             --------------------------------------------------------------------------" << endl;
-            cout << "                                   Selamat Menggunakan Kalkulator                      " << endl;
-            cout << "             --------------------------------------------------------------------------" << endl << endl;
+        void Kalkulator() {
+            cout << "\t\t ----------------------------------------------------------------------------" << endl;
+            cout << "\t\t\t\t\t Selamat menggunakan Kalkulator" << endl;
+            cout << "\t\t ----------------------------------------------------------------------------" << endl << endl;
         }
 
-        void Kalkulator(A bil1, A bil2, A hsl, B oper, B pil){
-            try{
-                operasi :
-                    cout << "               Jenis Operasi ( + | - | x or * | : or / | ^ | sin | cos | tan )? "; getline(cin, oper);
+        void Kalkulator(A bil1, A bil2, A hsl, B oper, B pil) {
+            try {
 
-                if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^" | oper == "sin" | oper == "cos" | oper == "tan"){
-                    if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^"){
+                operasi :
+                    cout << "\t\t Jenis operasi ( + | - | x or * | : or / | ^ | sin | cos | tan )? "; 
+                    cin >> oper;
+
+                if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^" | oper == "sin" | oper == "cos" | oper == "tan") {
+                    if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^") {
+
                         input :
-                            cout << "               Bilangan    = "; cin >> bil1;
+                            cout << "\t\t Bilangan    = "; 
+                            cin >> bil1;
 
                         rumus :
-                            if(oper == "+"){
-                                cout << "               Bilangan    = "; cin >> bil2;
+                            if(oper == "+") {
+                                cout << "\t\t Bilangan    = "; 
+                                cin >> bil2;
                                 hsl = bil1 + bil2;
                             }
-                            else if(oper == "-"){
-                                cout << "               Bilangan    = "; cin >> bil2;
+
+                            else if(oper == "-") {
+                                cout << "\t\t Bilangan    = "; 
+                                cin >> bil2;
                                 hsl = bil1 - bil2;              
                             }
-                            else if(oper == "x" | oper == "*"){
-                                cout << "               Bilangan    = "; cin >> bil2;
+
+                            else if(oper == "x" | oper == "*") {
+                                cout << "\t\t Bilangan    = "; 
+                                cin >> bil2;
                                 hsl = bil1 * bil2;              
                             }
-                            else if(oper == ":" | oper == "/"){
-                                cout << "               Bilangan    = "; cin >> bil2;
+
+                            else if(oper == ":" | oper == "/") {
+                                cout << "\t\t Bilangan    = "; 
+                                cin >> bil2;
                                 hsl = bil1 / bil2;          
                             }
-                            else if(oper == "^"){
-                                cout << "               Pangkat     = "; cin >> bil2;
+
+                            else if(oper == "^") {
+                                cout << "\t\t Pangkat     = "; 
+                                cin >> bil2;
                                 hsl = pow(bil1, bil2);
                             }
                     }
-                    else if (oper == "sin" | oper == "cos" | oper == "tan"){
-                        cout << "               Bilangan    = "; cin >> bil2;
+
+                    else if (oper == "sin" | oper == "cos" | oper == "tan") {
+                        cout << "\t\t Radian      = "; 
+                        cin >> bil2;
 
                         trigonometri :
-                            if(oper == "sin"){
+                            if(oper == "sin") {
                                 hsl = sin(bil2);
-                                cout << "               Hasil       = " << hsl << endl;
+                                cout << "\t\t Hasil       = " << hsl << endl;
                             }
-                            else if(oper == "cos"){
+
+                            else if(oper == "cos") {
                                 hsl = cos(bil2);
-                                cout << "               Hasil       = " << hsl << endl;
+                                cout << "\t\t Hasil       = " << hsl << endl;
                             }
-                            else if(oper == "tan"){
+
+                            else if(oper == "tan") {
                                 hsl = tan(bil2);
-                                cout << "               Hasil       = " << hsl << endl;
+                                cout << "\t\t Hasil       = " << hsl << endl;
                             }
                     }
                     
-                    if(!isinf(hsl)){
-                        while(oper != "="){
-                            cout << "\n               Jenis Operasi ( + | - | x or * | : or / | ^ | sin | cos | tan | = )? "; cin >> oper;
+                    if(!isinf(hsl)) {
+                        while(oper != "=") {
+                            cout << "\n\t\t Jenis operasi ( + | - | x or * | : or / | ^ | sin | cos | tan | = )? "; 
+                            cin >> oper;
 
-                            if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^"){
-                                cout << "               Hasil       = " << hsl << endl;
+                            if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^") {
+                                cout << "\t\t Hasil       = " << hsl << endl;
 
                                 bil1 = hsl;
                                 goto rumus;
                             }
-                            else if(oper == "="){
-                                cout << "               Hasil Akhir = " << hsl << endl << endl;
+
+                            else if(oper == "=") {
+                                cout << "\t\t Hasil akhir = " << hsl << endl << endl;
+
                                 tanya :   
-                                    cout << "               Apakah Anda ingin melakukan perhitungan kembali (Y/G)? "; cin >> pil; 
+                                    cout << "\t\t Apakah anda ingin melakukan perhitungan kembali (y/n)? "; 
+                                    cin >> pil; 
                                     cout << endl;
 
-                                    if(pil == "Y" | pil == "y"){
+                                    if(pil == "y" | pil == "Y") {
                                         goto operasi;
                                     }
-                                    else if(pil == "G" | pil == "g"){
+
+                                    else if(pil == "n" | pil == "N") {
                                         goto akhir;
                                     }
+
                                     else{
                                         goto tanya;
                                     }
                             }
-                            else if(oper == "sin" | oper == "cos" | oper == "tan"){
+
+                            else if(oper == "sin" | oper == "cos" | oper == "tan") {
                                 bil2 = hsl;
                                 goto trigonometri;
                             }
-                            else{
-                                cout << "               Operasi tidak tersedia." << endl;
+
+                            else {
+                                cout << "\t\t Operasi tidak tersedia." << endl;
                             }
                         }
                     }
-                    else{
+
+                    else {
                         throw range_error("range_error");
                     }
-                    akhir:
-                        cout << "             --------------------------------------------------------------------------" << endl;          
-                }
-                else{
-                    cout << "               Operasi tidak tersedia." << endl << endl;
 
+                    akhir:
+                        cout << "\t\t ----------------------------------------------------------------------------" << endl;          
+                }
+
+                else {
+                    cout << "\t\t Operasi tidak tersedia." << endl << endl;
                     goto operasi;
                 }
             }
-            catch(exception& e){
-                cout << "               Hasil Akhir = " << hsl << endl << endl;
-                cout << "             --------------------------------------------------------------------------" << endl;
+
+            catch(exception& e) {
+                cout << "\t\t Hasil akhir = tak hingga" << endl << endl;
+                cout << "\t\t ----------------------------------------------------------------------------" << endl;
             }
         }
 };
 
-int main(){
+int main() {
+
     system("cls");
-    system("color 09");
+    system("color 02");
     string oper, pil;
     float bil1, bil2, hsl;
 
@@ -172,5 +202,5 @@ int main(){
     wlc -> Kalkulator();
     wlc -> Kalkulator(bil1, bil2, hsl, oper, pil);
 
-    return 0;
+return 0;
 }
