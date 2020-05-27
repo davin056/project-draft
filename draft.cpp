@@ -135,7 +135,9 @@ class Rumus : public Welcome {
                                     cout << endl;
 
                                     if(pil == "y" | pil == "Y"){
-                                        goto operasi;
+                                      system("cls");
+                                      Kalkulator();
+                                      goto operasi;
                                     }
                                     else if(pil == "n" | pil == "N"){
                                         goto akhir;
