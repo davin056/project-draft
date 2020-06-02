@@ -1,4 +1,4 @@
-pengguna: // pada saat input nama user data akan ditambahkan dibawah 
-adi       // nama-nama pengguna yang sudah dicoba
-budi
+pengguna: // teks untuk melihat nama user yang masuk
+adi       // pada saat input nama user data akan ditambahkan diakhir file 
+budi      // nama-nama pengguna yang sudah dicoba
 ari
