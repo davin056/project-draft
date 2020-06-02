@@ -11,7 +11,6 @@ int main() {
 	map<string, string> data;
   	map<string,string>::iterator itr;
 
-
 	cout << "Masukkan nama pengguna: ";
 	getline(cin,nama); // input nama
 	os << "\n" << nama; // menambahkan nama ke txt
