@@ -1,0 +1,4 @@
+pengguna: // pada saat input nama user data akan ditambahkan dibawah 
+adi       // nama-nama pengguna yang sudah dicoba
+budi
+ari
