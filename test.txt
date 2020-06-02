@@ -1,4 +1,7 @@
 pengguna: // teks untuk melihat nama user yang masuk
 adi       // nama-nama pengguna yang sudah dicoba
+5         // rating yang diberi user
 budi      
-ari       // pada saat input nama user data akan ditambahkan diakhir file 
+4
+ari       // pada saat input nama user dan rating akan ditambahkan diakhir file 
+2
