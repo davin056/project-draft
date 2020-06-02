@@ -1,0 +1,10 @@
+sutarji
+guru
+mamad
+petani
+abdul
+buruh
+caca
+siswa
+amar
+zeni
