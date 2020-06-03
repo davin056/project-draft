@@ -328,7 +328,7 @@ class Welcome{
 
             gotoxy(49, Batas_atas + 4); cout << "\tTerima kasih " << itr->second << " semoga harimu menyenangkan." << endl;
             cout << endl << endl << '\t';
-            system("pause");
+            system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
         }
 
         virtual int hitung() = 0;
@@ -592,7 +592,7 @@ class Kalkulator : public Welcome{
 
                 gotoxy(0, Batas_atas + 4);
                 cout << "\t\t\t\t\t\t    Hasil Akhir  = Tak Hingga" << endl << endl;
-                cout << "\t\t\t\t\t\t    "; system("pause");
+                cout << "\t\t\t\t\t\t    ";system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
 
                 gotoxy(0, Batas_atas);
                 cout << "                                                                                                                                                                                                                                                      " << endl;
@@ -701,7 +701,7 @@ class Sandi {
 	            }
 	            else {
 	                cout << "\tTidak ada dalam daftar menu. Silahkan ulangi." << endl << endl;
-	                cout << "\t"; system("pause");
+	                cout << "\t"; system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
 
 	                gotoxy(79, Batas_atas + 1);
 	                cout << "\t                                                                                                                                                             " << endl;
@@ -769,7 +769,7 @@ class Sandi {
 	                	cout << *itr;
 	            	}
 	            	cout << endl << endl;
-	                cout << "\t"; system("pause");
+	                cout << "\t"; system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
 
 	                gotoxy(79, Batas_atas + 1);
 	                cout << "\t                                                                                                                                                             " << endl;
@@ -807,7 +807,7 @@ class Sandi {
 	                	cout << *itr;
 	            	}
 	            	cout << endl << endl;
-	                cout << "\t"; system("pause");
+	                cout << "\t"; system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
 
 	                gotoxy(79, Batas_atas + 1);
 	                cout << "\t                                                                                                                                                             " << endl;
@@ -858,7 +858,7 @@ class Sandi {
                     ratio++;
             }   
             cout << "\tAkurasi: " << (ratio/n)*100 << "%" << endl << endl;
-            cout << "\t"; system("pause");
+            cout << "\t"; system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
 
 	        gotoxy(79, Batas_atas + 1);
 	        cout << "\t                                                                                                                                                             " << endl;
