@@ -897,6 +897,7 @@ int main(){
 	int i, fitur;
 	Tampilan<int> tmpl;
 	tmpl.printKalkulator();
+	Welcome *wlc;
 	Kalkulator calc;
 	Sandi snd;
 
@@ -917,7 +918,8 @@ int main(){
             tmpl.printKalkulator();	 
             tmpl.printKalkulator(i);
             gotoxy(0, Batas_atas + 3); 
-            calc.hitung();
+            wlc = &calc;    
+	    wlc -> hitung();
             system("cls");
             goto awal;
         }
