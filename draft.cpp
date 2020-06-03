@@ -299,19 +299,19 @@ class Welcome{
 
 			gotoxy(0, Batas_atas); cout << "\tMasukkan Nama Anda : ";
 			getline(cin, nama);
-			user.insert(pair<string, string>(rate, nama));
 		}
 
 		~Welcome(){
 			ofstream operate;
-            operate.open("user.txt");
+            		operate.open("user.txt");
 
 			gotoxy(0, Batas_atas + 22);
-			itr = user.begin();
 
            	gotoxy(0, Batas_atas + 1); cout << "\tSilahkan berikan rating 1-10 : ";
            	cin >> rate;
-
+		user.insert(pair<string, string>(rate, nama));
+		
+		itr = user.begin();
            	if(!operate.fail()){
                 operate << "Username : " << nama << endl;
            		operate << "Rating   : " << rate << endl;
@@ -332,7 +332,7 @@ class Welcome{
 
             gotoxy(49, Batas_atas + 4); cout << "\tTerima kasih, " << itr->second << ", semoga harimu menyenangkan." << endl;
             cout << endl;
-            getch();
+            system("pause");
         }
 
         virtual void hitung() = 0;
@@ -767,7 +767,12 @@ class Sandi {
 
 
 	            if(v2.size() > v1.size()){
-	                cout << "\tDekripsi anda melebihi teks. Semoga lebih baik dalam percobaan berikutnya." << endl << endl;
+	                cout << "\tDekripsi anda melebihi teks. Semoga lebih baik dalam percobaan berikutnya." << endl;
+			cout << "\tJawaban yang benar: ";
+	                for(itr = v1.begin(); itr != v1.end(); itr++){
+		                cout << *itr;
+	            	}
+	            	cout << endl;
 	                cout << "\t"; system("pause");
 
 	                gotoxy(79, Batas_atas + 1);
@@ -800,7 +805,12 @@ class Sandi {
 	                goto daftar;
 	            }
 	            else if(v2.size() < v1.size()){
-	                cout << "\tDekripsi anda kurang lengkap. Semoga lebih baik dalam percobaan berikutnya." << endl << endl;
+	                cout << "\tDekripsi anda kurang lengkap. Semoga lebih baik dalam percobaan berikutnya." << endl;
+			cout << "\tJawaban yang benar: ";
+	                for(itr = v1.begin(); itr != v1.end(); itr++){
+		                cout << *itr;
+	            	}
+	            	cout << endl;
 	                cout << "\t"; system("pause");
 
 	                gotoxy(79, Batas_atas + 1);
@@ -837,8 +847,14 @@ class Sandi {
 
 	            if(v1 == v2)
 	                cout << "\tDekripsi berhasil." << endl;
-	            else
+	            else {
 	                cout << "\tDekripsi kurang tepat. Semoga lebih baik dalam percobaan berikutnya." << endl;
+			cout << "\tJawaban yang benar: ";
+	                for(itr = v1.begin(); itr != v1.end(); itr++){
+		                cout << *itr;
+	            	}
+	            	cout << endl;
+		    }
 
 
             for(i = 0; i < n; i++){
@@ -895,7 +911,7 @@ int main(){
         	 << "\t1. Kalkulator" << endl
 	         << "\t2. Sandi Caesar" <<endl
 	         << "\t3. Keluar" <<endl
-	         << "\tMasukkan nomor fitur: ";
+	         << "\tMasukkan nomor opsi yang dipilih: ";
         cin >> fitur;
 
     switch(fitur) {
