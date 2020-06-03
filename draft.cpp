@@ -49,7 +49,7 @@ class Welcome{
 
         ~Welcome(){
            itr = teks.begin();
-           cout << "Beri program kami nilai 1-10: ";
+           cout << "Silahkan berikan rating 1-10: ";
            cin >> rate;
            cout << "\t\t\t\tTerima kasih, ";
            cout << itr->second;
