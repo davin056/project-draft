@@ -298,10 +298,10 @@ class Welcome{
 		}
 
 		~Welcome(){
-		ofstream operate;
-            	operate.open("user.txt", ios::app); // gunakan file txt kosong
+			ofstream operate;
+        	operate.open("user.txt", ios::app); // gunakan file txt kosong
 
-		gotoxy(0, Batas_atas + 22);
+			gotoxy(0, Batas_atas + 22);
 
            	gotoxy(0, Batas_atas + 1); cout << "\tSilahkan berikan rating 1-10 : ";
            	cin >> rate;
