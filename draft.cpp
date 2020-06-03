@@ -322,14 +322,15 @@ class Welcome{
            	cin >> rate;
 
            	for(int i = 7; i <= 160; i++){
-				gotoxy(i, Batas_atas + 2); cout << Border_alas;
+				gotoxy(i, Batas_atas + 3); cout << Border_alas;
 			}
 
 			for(int i = 7; i <= 160; i++){
-				gotoxy(i, Batas_atas + 4); cout << Border_alas;
+				gotoxy(i, Batas_atas + 5); cout << Border_alas;
 			}
 
-            gotoxy(49, Batas_atas + 3); cout << "\tTerima kasih, " << itr->second << ", semoga harimu menyenangkan." << endl;
+            gotoxy(49, Batas_atas + 4); cout << "\tTerima kasih, " << itr->second << ", semoga harimu menyenangkan." << endl;
+            cout << endl;
             getch();
         }
 
