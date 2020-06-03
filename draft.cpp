@@ -299,19 +299,19 @@ class Welcome{
 
 			gotoxy(0, Batas_atas); cout << "\tMasukkan Nama Anda : ";
 			getline(cin, nama);
-			user.insert(pair<string, string>(rate, nama));
 		}
 
 		~Welcome(){
 			ofstream operate;
-            operate.open("user.txt");
+            operate.open("user.txt", ios::app);
 
 			gotoxy(0, Batas_atas + 22);
-			itr = user.begin();
 
            	gotoxy(0, Batas_atas + 1); cout << "\tSilahkan berikan rating 1-10 : ";
            	cin >> rate;
+           	user.insert(pair<string, string>(rate, nama));
 
+           	itr = user.begin();
            	if(!operate.fail()){
                 operate << "Username : " << nama << endl;
            		operate << "Rating   : " << rate << endl;
@@ -330,12 +330,12 @@ class Welcome{
 				gotoxy(i, Batas_atas + 5); cout << Border_alas;
 			}
 
-            gotoxy(49, Batas_atas + 4); cout << "\tTerima kasih, " << itr->second << ", semoga harimu menyenangkan." << endl;
-            cout << endl;
-            getch();
+            gotoxy(49, Batas_atas + 4); cout << "\tTerima kasih " << itr->second << " semoga harimu menyenangkan." << endl;
+            cout << endl << endl << '\t';
+            system("pause");
         }
 
-        virtual void hitung() = 0;
+        virtual int hitung() = 0;
 };
 
 class Kalkulator : public Welcome{
@@ -402,7 +402,7 @@ class Kalkulator : public Welcome{
             return hsl = tan(bil2);
         }
 
-        void hitung(){
+        int hitung(){
             try{
             	cout << endl;
                 operasi :
@@ -549,7 +549,7 @@ class Kalkulator : public Welcome{
 								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
 								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
 								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
-				                                break;
+				                                return 0;
 				                            }
 				                            else 
 				                                goto tanya;
@@ -704,7 +704,7 @@ class Sandi {
 	                return 0;
 	            }
 	            else {
-	                cout << "\tTidak ada dalam daftar menu. Silahkan ulangi." << endl;
+	                cout << "\tTidak ada dalam daftar menu. Silahkan ulangi." << endl << endl;
 	                cout << "\t"; system("pause");
 
 	                gotoxy(79, Batas_atas + 1);
@@ -767,7 +767,12 @@ class Sandi {
 
 
 	            if(v2.size() > v1.size()){
-	                cout << "\tDekripsi anda melebihi teks. Semoga lebih baik dalam percobaan berikutnya." << endl << endl;
+	                cout << "\tDekripsi anda melebihi teks. Semoga lebih baik dalam percobaan berikutnya." << endl;
+	                cout << "\tJawaban yang benar: ";
+	                for(itr = v1.begin(); itr != v1.end(); itr++){
+	                	cout << *itr;
+	            	}
+	            	cout << endl << endl;
 	                cout << "\t"; system("pause");
 
 	                gotoxy(79, Batas_atas + 1);
@@ -800,7 +805,12 @@ class Sandi {
 	                goto daftar;
 	            }
 	            else if(v2.size() < v1.size()){
-	                cout << "\tDekripsi anda kurang lengkap. Semoga lebih baik dalam percobaan berikutnya." << endl << endl;
+	                cout << "\tDekripsi anda kurang lengkap. Semoga lebih baik dalam percobaan berikutnya." << endl;
+	                cout << "\tJawaban yang benar: ";
+	                for(itr = v1.begin(); itr != v1.end(); itr++){
+	                	cout << *itr;
+	            	}
+	            	cout << endl << endl;
 	                cout << "\t"; system("pause");
 
 	                gotoxy(79, Batas_atas + 1);
@@ -837,8 +847,14 @@ class Sandi {
 
 	            if(v1 == v2)
 	                cout << "\tDekripsi berhasil." << endl;
-	            else
+	            else{
 	                cout << "\tDekripsi kurang tepat. Semoga lebih baik dalam percobaan berikutnya." << endl;
+	                cout << "\tJawaban yang benar: ";
+	                for(itr = v1.begin(); itr != v1.end(); itr++){
+	                	cout << *itr;
+	            	}
+	            	cout << endl;
+	            }
 
 
             for(i = 0; i < n; i++){
@@ -884,18 +900,19 @@ int main(){
 	system("cls");
 	int i, fitur;
 	Tampilan<int> tmpl;
-	tmpl.printKalkulator();	
+	tmpl.printKalkulator();
 	Kalkulator calc;
 	Sandi snd;
 
 	awal:
+		tmpl.printKalkulator();
 		gotoxy(79, Batas_atas + 2);
-		cout << "Menu Utama\n\n"
+		cout << "\tMenu Utama\n\n"
         	 << "\tSilahkan pilih fitur yang ingin digunakan:" << endl
         	 << "\t1. Kalkulator" << endl
 	         << "\t2. Sandi Caesar" <<endl
 	         << "\t3. Keluar" <<endl
-	         << "\tMasukkan nomor fitur: ";
+	         << "\tMasukkan nomor opsi yang dipilih: ";
         cin >> fitur;
 
     switch(fitur) {
@@ -903,14 +920,17 @@ int main(){
             system("cls");  
             tmpl.printKalkulator();	 
             tmpl.printKalkulator(i);
-            gotoxy(0, Batas_atas + 3); calc.hitung();
+            gotoxy(0, Batas_atas + 3); 
+            calc.hitung();
+            system("cls");
             goto awal;
         }
         case 2 : {
             system("cls");  
             tmpl.printKalkulator();
-            gotoxy(0, Batas_atas + 1);   
+            gotoxy(0, Batas_atas + 2);   
             snd.cypher();
+            system("cls");
             goto awal;
         }
         case 3 : {
@@ -918,7 +938,11 @@ int main(){
             tmpl.printKalkulator();
             break;
         }
+        default : {
+        	system("cls");
+        	goto awal;
+        }
     }
 
-	return 0;
+return 0;
 }
