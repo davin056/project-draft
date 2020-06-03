@@ -289,7 +289,7 @@ class Welcome{
 		string nama, rate;
 
 	public :
-		map<string,string> teks;
+		map<string,string> user;
         map<string,string>::iterator itr;
 
 		Welcome(){
@@ -299,7 +299,7 @@ class Welcome{
 
 			gotoxy(0, Batas_atas); cout << "\tMasukkan Nama Anda : ";
 			getline(cin, nama);
-			teks.insert(pair<string, string>(rate, nama));
+			user.insert(pair<string, string>(rate, nama));
 		}
 
 		~Welcome(){
@@ -307,7 +307,7 @@ class Welcome{
             operate.open("user.txt");
 
 			gotoxy(0, Batas_atas + 22);
-			itr = teks.begin();
+			itr = user.begin();
 
            	gotoxy(0, Batas_atas + 1); cout << "\tSilahkan berikan rating 1-10 : ";
            	cin >> rate;
