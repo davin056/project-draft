@@ -299,7 +299,7 @@ class Welcome{
 
 		~Welcome(){
 			ofstream operate;
-        	operate.open("user.txt", ios::app); // gunakan file txt kosong
+        	operate.open("user.txt", ios::app); // gunakan file txt baru pada eksekusi perdana
 
 			gotoxy(0, Batas_atas + 22);
 
