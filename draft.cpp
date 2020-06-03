@@ -1,330 +1,922 @@
 #include <iostream>
-#include <cmath>
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
 #include <vector>
 #include <map>
 #include <iterator>
+#include <conio.h>
+#include <string>
+#include <cmath>
+#include <windows.h>
+
+#define Batas_kiri 3
+#define Batas_kanan 43
+#define Batas_atas 11
+#define Batas_bawah 36
+#define Border_alas char(205)
+#define Border_samping char(206)
 
 using namespace std;
 
-class Welcome{
-    protected :
-        string uname;
-        string rate;
+HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD CursorPosition;
 
-    public :
-        map<string,string> teks;
+void gotoxy(int x, int y){
+	CursorPosition.X = x;
+	CursorPosition.Y = y;
+	SetConsoleCursorPosition(console, CursorPosition);
+}
+
+template <class A>
+class Tampilan{
+	public :
+		void printKalkulator(){
+			gotoxy(24, 2); cout << "KKKK    KKKK AAAAAAAAAAAA LLLL     KKKK    KKKK UUUU    UUUU LLLL     AAAAAAAAAAAA TTTTTTTTTTTT   OOOOOOOO   RRRRRRRRRR ";
+			gotoxy(24, 3); cout << "KKKK    KKKK AAAAAAAAAAAA LLLL     KKKK    KKKK UUUU    UUUU LLLL     AAAAAAAAAAAA TTTTTTTTTTTT  OOOOOOOOOO  RRRR    RRR";
+			gotoxy(24, 4); cout << "KKKK   KKKK  AAAA    AAAA LLLL     KKKK   KKKK  UUUU    UUUU LLLL     AAAA    AAAA     TTTT     OOOO    OOOO RRRR    RRR";
+			gotoxy(24, 5); cout << "KKKKKKKKK    AAAAAAAAAAAA LLLL     KKKKKKKKK    UUUU    UUUU LLLL     AAAAAAAAAAAA     TTTT     OOOO    OOOO RRRRRRRRR  ";
+			gotoxy(24, 6); cout << "KKKK   KKKK  AAAAAAAAAAAA LLLL     KKKK   KKKK  UUUU    UUUU LLLL     AAAAAAAAAAAA     TTTT     OOOO    OOOO RRRR   RRR ";
+			gotoxy(24, 7); cout << "KKKK    KKKK AAAA    AAAA LLLLLLLL KKKK    KKKK  UUUUUUUUUU  LLLLLLLL AAAA    AAAA     TTTT      OOOOOOOOOO  RRRR    RRR";
+			gotoxy(24, 8); cout << "KKKK    KKKK AAAA    AAAA LLLLLLLL KKKK    KKKK   UUUUUUUU   LLLLLLLL AAAA    AAAA     TTTT       OOOOOOOO   RRRR    RRR";
+		}
+
+		void printKalkulator(A i){
+			for(i = Batas_atas; i <= Batas_bawah; i++){ //batas kanan kiri kalkulator
+				gotoxy(Batas_kiri, i); cout << Border_samping;
+				gotoxy(Batas_kanan, i); cout << Border_samping;
+			}
+
+			for(i = Batas_kiri + 1; i <= Batas_kanan - 1; i++){ //batas atas, tengah, bawah kalkulator
+				gotoxy(i, Batas_atas); cout << Border_alas;
+				gotoxy(i, Batas_atas + 5); cout << Border_alas;
+				gotoxy(i, Batas_bawah); cout << Border_alas;
+			}
+
+			for(i = Batas_atas; i <= 13; i++){ //batas kanan kiri tempat nampilin perhitungan
+				gotoxy(Batas_kiri + 3, i + 1); cout << Border_samping;
+				gotoxy(Batas_kanan - 3, i + 1); cout << Border_samping;
+			}
+
+			for(i = 7; i <= 39; i++){ //batas atas bawah tempat nampilin perhitungan
+				gotoxy(i, Batas_atas + 1); cout << Border_alas;
+				gotoxy(i, Batas_atas + 3); cout << Border_alas;
+			}
+			
+			for(i = Batas_atas; i <= 11; i++){ //bacaan merk
+				gotoxy(Batas_kiri + 14, i + 4); cout << "GREEN LANTERN";
+			}
+			
+			for(i = Batas_atas; i <= 13; i++){ //batas kanan kiri sin, cos, tan, ac
+				gotoxy(Batas_kiri + 6, i + 6); cout << Border_samping;
+				gotoxy(Batas_kiri + 12, i + 6); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 17, i + 6); cout << Border_samping;
+				gotoxy(Batas_kiri + 23, i + 6); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 28, i + 6); cout << Border_samping;
+				gotoxy(Batas_kiri + 34, i + 6); cout << Border_samping;
+			}
+
+			for(i = 10; i <= 14; i++){ //batas atas bawah sin
+				gotoxy(i, Batas_atas + 6); cout << Border_alas;
+				gotoxy(i, Batas_atas + 8); cout << Border_alas;
+			}
+
+			for(i = 21; i <= 25; i++){ //batas atas bawah cos
+				gotoxy(i, Batas_atas + 6); cout << Border_alas;
+				gotoxy(i, Batas_atas + 8); cout << Border_alas;
+			}
+
+			for(i = 32; i <= 36; i++){ //batas atas bawah tan
+				gotoxy(i, Batas_atas + 6); cout << Border_alas;
+				gotoxy(i, Batas_atas + 8); cout << Border_alas;
+			}
+
+			for(i = Batas_atas; i <= 11; i++){ //bacaan sin, cos, tan, ac 
+				gotoxy(Batas_kiri + 8, i + 7); cout << "Sin";
+				gotoxy(Batas_kiri + 19, i + 7); cout << "Cos";
+				gotoxy(Batas_kiri + 30, i + 7); cout << "Tan";
+			}
+
+			for(i = Batas_atas; i <= 13; i++){ //batas kanan kiri 7, 8, 9, :
+				gotoxy(Batas_kiri + 3, i + 10); cout << Border_samping;
+				gotoxy(Batas_kiri + 7, i + 10); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 10, i + 10); cout << Border_samping;
+				gotoxy(Batas_kiri + 14, i + 10); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 17, i + 10); cout << Border_samping;
+				gotoxy(Batas_kiri + 21, i + 10); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 26, i + 10); cout << Border_samping;
+				gotoxy(Batas_kiri + 30, i + 10); cout << Border_samping;
+			}
+
+			for(i = 7; i <= 9; i++){ //batas atas bawah 7
+				gotoxy(i, Batas_atas + 10); cout << Border_alas;
+				gotoxy(i, Batas_atas + 12); cout << Border_alas;
+			}
+
+			for(i = 14; i <= 16; i++){ //batas atas bawah 8
+				gotoxy(i, Batas_atas + 10); cout << Border_alas;
+				gotoxy(i, Batas_atas + 12); cout << Border_alas;
+			}
+
+			for(i = 21; i <= 23; i++){ //batas atas bawah 9
+				gotoxy(i, Batas_atas + 10); cout << Border_alas;
+				gotoxy(i, Batas_atas + 12); cout << Border_alas;
+			}
+
+			for(i = 30; i <= 32; i++){ //batas atas bawah :
+				gotoxy(i, Batas_atas + 10); cout << Border_alas;
+				gotoxy(i, Batas_atas + 12); cout << Border_alas;
+			}
+
+			for(i = Batas_atas; i <= 11; i++){ //bacaan 7, 8, 9, :
+				gotoxy(Batas_kiri + 5, i + 11); cout << "7";
+				gotoxy(Batas_kiri + 12, i + 11); cout << "8";
+				gotoxy(Batas_kiri + 19, i + 11); cout << "9";
+				gotoxy(Batas_kiri + 28, i + 11); cout << ":";
+			}
+
+			for(i = Batas_atas; i <= 13; i++){ //batas kanan kiri 4, 5, 6, x
+				gotoxy(Batas_kiri + 3, i + 14); cout << Border_samping;
+				gotoxy(Batas_kiri + 7, i + 14); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 10, i + 14); cout << Border_samping;
+				gotoxy(Batas_kiri + 14, i + 14); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 17, i + 14); cout << Border_samping;
+				gotoxy(Batas_kiri + 21, i + 14); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 26, i + 14); cout << Border_samping;
+				gotoxy(Batas_kiri + 30, i + 14); cout << Border_samping;
+			}
+
+			for(i = 7; i <= 9; i++){ //batas atas bawah 4
+				gotoxy(i, Batas_atas + 14); cout << Border_alas;
+				gotoxy(i, Batas_atas + 16); cout << Border_alas;
+			}
+
+			for(i = 14; i <= 16; i++){ //batas atas bawah 5
+				gotoxy(i, Batas_atas + 14); cout << Border_alas;
+				gotoxy(i, Batas_atas + 16); cout << Border_alas;
+			}
+
+			for(i = 21; i <= 23; i++){ //batas atas bawah 6
+				gotoxy(i, Batas_atas + 14); cout << Border_alas;
+				gotoxy(i, Batas_atas + 16); cout << Border_alas;
+			}
+
+			for(i = 30; i <= 32; i++){ //batas atas bawah x
+				gotoxy(i, Batas_atas + 14); cout << Border_alas;
+				gotoxy(i, Batas_atas + 16); cout << Border_alas;
+			}
+
+			for(i = Batas_atas; i <= 11; i++){ //bacaan 4, 5, 6, x
+				gotoxy(Batas_kiri + 5, i + 15); cout << "4";
+				gotoxy(Batas_kiri + 12, i + 15); cout << "5";
+				gotoxy(Batas_kiri + 19, i + 15); cout << "6";
+				gotoxy(Batas_kiri + 28, i + 15); cout << "x";
+			}
+
+			for(i = Batas_atas; i <= 13; i++){ //batas kanan kiri 1, 2, 3, -
+				gotoxy(Batas_kiri + 3, i + 18); cout << Border_samping;
+				gotoxy(Batas_kiri + 7, i + 18); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 10, i + 18); cout << Border_samping;
+				gotoxy(Batas_kiri + 14, i + 18); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 17, i + 18); cout << Border_samping;
+				gotoxy(Batas_kiri + 21, i + 18); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 26, i + 18); cout << Border_samping;
+				gotoxy(Batas_kiri + 30, i + 18); cout << Border_samping;
+			}
+
+			for(i = 7; i <= 9; i++){ //batas atas bawah 1
+				gotoxy(i, Batas_atas + 18); cout << Border_alas;
+				gotoxy(i, Batas_atas + 20); cout << Border_alas;
+			}
+
+			for(i = 14; i <= 16; i++){ //batas atas bawah 2
+				gotoxy(i, Batas_atas + 18); cout << Border_alas;
+				gotoxy(i, Batas_atas + 20); cout << Border_alas;
+			}
+			
+			for(i = 21; i <= 23; i++){ //batas atas bawah 3
+				gotoxy(i, Batas_atas + 18); cout << Border_alas;
+				gotoxy(i, Batas_atas + 20); cout << Border_alas;
+			}
+			
+			for(i = 30; i <= 32; i++){ //batas atas bawah -
+				gotoxy(i, Batas_atas + 18); cout << Border_alas;
+				gotoxy(i, Batas_atas + 20); cout << Border_alas;
+			}
+			
+			for(i = Batas_atas; i <= 11; i++){ //bacaan 1, 2, 3, -
+				gotoxy(Batas_kiri + 5, i + 19); cout << "1";
+				gotoxy(Batas_kiri + 12, i + 19); cout << "2";
+				gotoxy(Batas_kiri + 19, i + 19); cout << "3";
+				gotoxy(Batas_kiri + 28, i + 19); cout << "-";
+			}
+			
+			for(i = Batas_atas; i <= 13; i++){ //batas kanan kiri 0, ., +
+				gotoxy(Batas_kiri + 6, i + 22); cout << Border_samping;
+				gotoxy(Batas_kiri + 10, i + 22); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 14, i + 22); cout << Border_samping;
+				gotoxy(Batas_kiri + 18, i + 22); cout << Border_samping;
+
+				gotoxy(Batas_kiri + 26, i + 22); cout << Border_samping;
+				gotoxy(Batas_kiri + 30, i + 22); cout << Border_samping;
+			}
+			
+			for(i = 10; i <= 12; i++){ //batas atas bawah 0
+				gotoxy(i, Batas_atas + 22); cout << Border_alas;
+				gotoxy(i, Batas_atas + 24); cout << Border_alas;
+			}
+			
+			for(i = 18; i <= 20; i++){ //batas atas bawah .
+				gotoxy(i, Batas_atas + 22); cout << Border_alas;
+				gotoxy(i, Batas_atas + 24); cout << Border_alas;
+			}
+			
+			for(i = 30; i <= 32; i++){ //batas atas bawah +
+				gotoxy(i, Batas_atas + 22); cout << Border_alas;
+				gotoxy(i, Batas_atas + 24); cout << Border_alas;
+			}
+			
+			for(i = Batas_atas; i <= 11; i++){ //bacaan 0, ., +
+				gotoxy(Batas_kiri + 8, i + 23); cout << "0";
+				gotoxy(Batas_kiri + 16, i + 23); cout << ".";
+				gotoxy(Batas_kiri + 28, i + 23); cout << "+";
+			}
+			
+			for(i = Batas_atas; i <= 17; i++){ //batas kanan kiri ^
+				gotoxy(Batas_kiri + 33, i + 10); cout << Border_samping;
+				gotoxy(Batas_kiri + 37, i + 10); cout << Border_samping;
+			}
+			
+			for(i = 37; i <= 39; i++){ //batas atas bawah ^
+				gotoxy(i, Batas_atas + 10); cout << Border_alas;
+				gotoxy(i, Batas_atas + 16); cout << Border_alas;
+			}
+			
+			for(i = Batas_atas; i <= 11; i++){ //bacaan ^
+				gotoxy(Batas_kiri + 35, i + 13); cout << "^";
+			}
+			
+			for(i = Batas_atas; i <= 17; i++){ //batas kanan kiri =
+				gotoxy(Batas_kiri + 33, i + 18); cout << Border_samping;
+				gotoxy(Batas_kiri + 37, i + 18); cout << Border_samping;
+			}
+			
+			for(i = 37; i <= 39; i++){ //batas atas bawah =
+				gotoxy(i, Batas_atas + 18); cout << Border_alas;
+				gotoxy(i, Batas_atas + 24); cout << Border_alas;
+			}
+			
+			for(i = Batas_atas; i <= 11; i++){ //bacaan =
+				gotoxy(Batas_kiri + 35, i + 21); cout << "=";
+			}
+		}
+};
+
+class Welcome{
+	private :
+		string nama, rate;
+
+	public :
+		map<string,string> teks;
         map<string,string>::iterator itr;
 
-        Welcome(){
+		Welcome(){
+			ofstream operate;
+            operate.open("user.txt");
 
+            for(int i = 7; i <= 160; i++){
+				gotoxy(i, Batas_atas + 1); cout << Border_alas;
+			}
 
-            ofstream operate;
-            operate.open("user.txt", ios::app);
+			gotoxy(0, Batas_atas); cout << "\tMasukkan Nama Anda : ";
+			getline(cin, nama);
+			teks.insert(pair<string, string>(rate, nama));
 
-            cout << endl;
-            cout << "\t\t ----------------------------------------------------------------------------" << endl;
-            cout << "\t\t\t    Selamat Datang Di Aplikasi Kalkulator Dan Sandi Caesar !" << endl;
-            cout << "\t\t ----------------------------------------------------------------------------" << endl;
-            cout << "\t\t Silahkan masukkan nama anda : ";
-            getline(cin, uname);
-            teks.insert(pair<string, string>(rate, uname));
-            system("cls");
-
-            if(!operate.fail()){
-                operate << "Username : " << uname << endl;
+			if(!operate.fail()){
+                operate << "Username : " << nama << endl;
                 operate.close();
                 cout << endl;
             }
 
             ifstream yourfile;
             yourfile.open("user.txt");
+		}
 
-            cout << "\t\t ----------------------------------------------------------------------------" << endl;
-            cout << "\t\t\t    Selamat Menggunakan Aplikasi Kalkulator Dan Sandi Caesar" << endl;
-            cout << "\t\t ----------------------------------------------------------------------------" << endl << endl;
+		~Welcome(){
+			gotoxy(0, Batas_atas + 22);
+			itr = teks.begin();
+
+           	gotoxy(0, Batas_atas + 1); cout << "\tSilahkan berikan rating 1-10 : ";
+           	cin >> rate;
+
+           	for(int i = 7; i <= 160; i++){
+				gotoxy(i, Batas_atas + 2); cout << Border_alas;
+			}
+
+			for(int i = 7; i <= 160; i++){
+				gotoxy(i, Batas_atas + 4); cout << Border_alas;
+			}
+
+            gotoxy(49, Batas_atas + 3); cout << "\tTerima kasih, " << itr->second << ", semoga harimu menyenangkan." << endl;
+            getch();
         }
 
-        ~Welcome(){
-           itr = teks.begin();
-           cout << "Silahkan berikan rating 1-10: ";
-           cin >> rate;
-           cout << "\t\t\t\tTerima kasih, ";
-           cout << itr->second;
-           cout << ". Semoga harimu menyenangkan" << endl;
-           cout << "\t\t ----------------------------------------------------------------------------" << endl;
-            // getch();
-        }
-
-        virtual int kalkulator(float bil1, float bil2, float hsl, string oper, string pil) = 0;
-
+        virtual void hitung() = 0;
 };
 
+class Kalkulator : public Welcome{
+	private :
+		float bil1, bil2, hsl;
+		string oper, pil;
 
-template <class A, class B>
+	public :
+		void Operasi(){
+            cout << "\t\t\t\t\t\t    Jenis Operasi? ";
+            cin >> oper;
+        }
 
-class Rumus : public Welcome {
-    public :
-        int kalkulator(A bil1, A bil2, A hsl, B oper, B pil){
+        void Bilangan1(){
+            cout << "\t\t\t\t\t\t    Bilangan     = ";
+            cin >> bil1;
+        }
+
+        void Bilangan2(){
+            cout << "\t\t\t\t\t\t    Bilangan     = ";
+            cin >> bil2;
+        }
+
+        void Radian(){
+            cout << "\t\t\t\t\t\t    Radian       = ";
+            cin >> bil2;
+        }
+
+        void Tanya(){
+            cout << "\t\t\t\t\t\t    Apakah anda ingin melakukan perhitungan kembali (y/n)? ";
+            cin >> pil;
+            cout << endl;
+        }
+
+		int tambah(){
+            return hsl = bil1 + bil2;
+        }
+
+        int kurang(){
+            return hsl = bil1 - bil2;              
+        }
+
+        int kali(){
+            return hsl = bil1 * bil2;              
+        }
+
+        int bagi(){
+            return hsl = bil1 / bil2;          
+        }
+        
+        int pangkat(){
+            return hsl = pow(bil1, bil2);
+        }
+
+        int sinus(){
+            return hsl = sin(bil2);
+        }
+
+        int cosinus(){
+            return hsl = cos(bil2);
+        }
+
+        int tangen(){
+            return hsl = tan(bil2);
+        }
+
+        void hitung(){
             try{
+            	cout << endl;
                 operasi :
-                    cout << "\t\t Jenis operasi ( + | - | x or * | : or / | ^ | sin | cos | tan )? "; 
-                    cin >> oper;
-
+                    Operasi();
+                
                 if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^" | oper == "sin" | oper == "cos" | oper == "tan"){
                     if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^"){
-                        input :
-                            cout << "\t\t Bilangan    = "; 
-                            cin >> bil1;
+                        Bilangan1();
 
-                        rumus :
+                        tambah_kurang_kali_bagi_pangkat :
                             if(oper == "+"){
-                                cout << "\t\t Bilangan    = "; 
-                                cin >> bil2;
-                                hsl = bil1 + bil2;
+                                Bilangan2();
+                                tambah();
                             }
                             else if(oper == "-"){
-                                cout << "\t\t Bilangan    = "; 
-                                cin >> bil2;
-                                hsl = bil1 - bil2;              
+                                Bilangan2();
+                                kurang();
                             }
                             else if(oper == "x" | oper == "*"){
-                                cout << "\t\t Bilangan    = "; 
-                                cin >> bil2;
-                                hsl = bil1 * bil2;              
+                                Bilangan2();
+                                kali();
                             }
-                            else if(oper == ":" | oper == "/") {
-                                cout << "\t\t Bilangan    = "; 
-                                cin >> bil2;
-                                hsl = bil1 / bil2;          
+                            else if(oper == ":" | oper == "/"){
+                                Bilangan2();
+                                bagi();
                             }
                             else if(oper == "^"){
-                                cout << "\t\t Pangkat     = "; 
-                                cin >> bil2;
-                                hsl = pow(bil1, bil2);
+                                Bilangan2();
+                                pangkat();
                             }
                     }
+                    else if(oper == "sin" | oper == "cos" | oper == "tan"){
+                        Radian();
 
-                    else if (oper == "sin" | oper == "cos" | oper == "tan"){
-                        cout << "\t\t Radian      = "; 
-                        cin >> bil2;
-
-                        trigonometri :
+                        sin_cos_tan :
                             if(oper == "sin"){
-                                hsl = sin(bil2);
-                                cout << "\t\t Hasil       = " << hsl << endl;
+                                sinus();
                             }
                             else if(oper == "cos"){
-                                hsl = cos(bil2);
-                                cout << "\t\t Hasil       = " << hsl << endl;
+                                cosinus();
                             }
                             else if(oper == "tan"){
-                                hsl = tan(bil2);
-                                cout << "\t\t Hasil       = " << hsl << endl;
+                                tangen();
                             }
                     }
-                    
+
                     if(!isinf(hsl)){
                         while(oper != "="){
-                            cout << "\n\t\t Jenis operasi ( + | - | x or * | : or / | ^ | sin | cos | tan | = )? "; 
-                            cin >> oper;
+                        	if(!isnan(hsl)){
+	                            gotoxy(9, 13);
+	                            cout << "                             ";
+	                            gotoxy(9, 13);
+	                            cout << hsl;
+	                            
+	                            hasil :
+		                            gotoxy(0, Batas_atas + 4);
+		                            cout << "\t\t\t\t\t\t                                                                                  " << endl;
+		                            cout << "\t\t\t\t\t\t                                                                                  " << endl;
+		                            cout << "\t\t\t\t\t\t                                                                                  " << endl;
+		                            cout << "\t\t\t\t\t\t                                                                                  " << endl;
+		                            cout << "\t\t\t\t\t\t                                                                                  " << endl;
+		                            cout << "\t\t\t\t\t\t                                                                                  " << endl;
+		                            cout << "\t\t\t\t\t\t                                                                                  " << endl;
+		                            cout << "\t\t\t\t\t\t                                                                                  " << endl;
+		                            cout << "\t\t\t\t\t\t                                                                                  " << endl;
+		                            cout << "\t\t\t\t\t\t                                                                                  " << endl;
 
-                            if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^"){
-                                cout << "\t\t Hasil       = " << hsl << endl;
+		                            gotoxy(0, Batas_atas + 4);
+		                            Operasi();
 
-                                bil1 = hsl;
-                                goto rumus;
-                            }
-                            else if(oper == "="){
-                                cout << "\t\t Hasil akhir = " << hsl << endl << endl;
+		                            if(oper == "+" | oper == "-" | oper == "x" | oper == "*" | oper == ":" | oper == "/" | oper == "^"){
+		                                bil1 = hsl;
+		                                goto tambah_kurang_kali_bagi_pangkat;
+		                            }
+		                            else if(oper == "="){
+		                                cout << "\t\t\t\t\t\t    Hasil Akhir  = " << hsl << endl << endl;
 
-                                tanya :   
-                                    cout << "\t\t Apakah anda ingin melakukan perhitungan kembali (y/n)? "; 
-                                    cin >> pil; 
-                                    cout << endl;
+		                                tanya :
+				                            Tanya();
 
-                                    if(pil == "y" | pil == "Y"){
-                                      system("cls");
-                                      goto operasi;
-                                    }
-                                    else if(pil == "n" | pil == "N"){
-                                        goto akhir;
-                                    }
-                                    else{
-                                        goto tanya;
-                                    }
-                            }
-                            else if(oper == "sin" | oper == "cos" | oper == "tan"){
-                                bil2 = hsl;
-                                goto trigonometri;
-                            }
-                            else{
-                                cout << "\t\t Operasi tidak tersedia." << endl;
-                            }
+				                            if(pil == "y" | pil == "Y"){
+				                            	tes :
+					                            	gotoxy(9, 13);
+				                            		cout << "                             ";
+				                            		gotoxy(0, Batas_atas + 4);
+				                            		cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    cout << "\t\t\t\t\t\t                                                                                  " << endl;
+								                    gotoxy(0, Batas_atas + 4);
+					                                goto operasi;
+				                            }
+				                            else if(pil == "n" | pil == "N"){
+								                gotoxy(0, Batas_atas);
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+								                cout << "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            " << endl;
+				                                break;
+				                            }
+				                            else 
+				                                goto tanya;
+		                            }
+		                            else if(oper == "sin" | oper == "cos" | oper == "tan"){
+		                                bil2 = hsl;
+		                                goto sin_cos_tan;
+		                            }
+	                        }
+	                        else{
+	                        	hsl = 0;
+	                        	gotoxy(9, 13);
+	                            cout << "                             ";
+	                            gotoxy(9, 13);
+	                            cout << hsl;
+	                            goto hasil;
+	                        }
                         }
                     }
                     else{
-                        cout << "\t\t Hasil akhir = Tak hingga" << endl << endl;
-                        goto tanya;
+                        throw range_error("range_error");
                     }
-
-                    akhir:
-                        cout << "\t\t ----------------------------------------------------------------------------" << endl;          
                 }
                 else{
-                    cout << "\t\t Operasi tidak tersedia." << endl << endl;
-                    goto operasi;
+                	goto tes;
                 }
             }
             catch(exception& e){
-                
+            	gotoxy(9, 13);
+                cout << "                             ";
+                gotoxy(9, 13);
+                cout << hsl;
+                gotoxy(0, Batas_atas + 4);
+                cout << "\t\t\t\t\t\t                                                                                  " << endl;
+                cout << "\t\t\t\t\t\t                                                                                  " << endl;
+                cout << "\t\t\t\t\t\t                                                                                  " << endl;
+                cout << "\t\t\t\t\t\t                                                                                  " << endl;
+                cout << "\t\t\t\t\t\t                                                                                  " << endl;
+                cout << "\t\t\t\t\t\t                                                                                  " << endl;
+                cout << "\t\t\t\t\t\t                                                                                  " << endl;
+                cout << "\t\t\t\t\t\t                                                                                  " << endl;
+                cout << "\t\t\t\t\t\t                                                                                  " << endl;
+                cout << "\t\t\t\t\t\t                                                                                  " << endl;
+
+                gotoxy(0, Batas_atas + 4);
+                cout << "\t\t\t\t\t\t    Hasil Akhir  = Tak Hingga" << endl << endl;
+                cout << "\t\t\t\t\t\t    "; system("pause");
+
+                gotoxy(0, Batas_atas);
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
+                cout << "                                                                                                                                                                                                                                                      " << endl;
             }
         }
 };
 
-
 class Sandi {
+	public:
+    	int cypher() {
+	        char a, random;
+	        float ratio = 0;
+	        int i, m, n, o;
+	        string b;
+        	vector<char>::iterator itr;
 
-public:
-    int cypher() {
-        char a,random;
-        float ratio=0;
-        int i,m,n,o;
-        string b;
-        vector<char>::iterator itr;
+	        srand((unsigned) time(0));
+	        m = (rand() % 25) + 1;
 
-        srand((unsigned) time(0));
-        m = (rand() % 25) + 1;
+	        daftar:
+	            vector<char>v1;
 
-        daftar:
-            vector<char>v1;
-
-            cout << "Daftar menu" <<endl 
-                 << "1. 5 huruf" << endl
-                 << "2. 10 huruf" << endl
-                 << "3. 15 huruf" << endl
-                 << "4. 20 huruf" << endl
-                 << "5. custom" << endl
-                 << "6. kembali ke menu utama" << endl
-                 << "Pilih nomor: ";
-            cin >> o;
-
-
-            if(o == 1)
-                n = 5;
-            else if(o == 2)
-                n = 10;
-            else if(o == 3)
-                n = 15;
-            else if(o == 4)
-                n = 20;
-            else if(o == 5){
-                cout << "Masukkan jumlah huruf (antara 1-20): ";
-                cin >> n;
-                if(n > 20 || n<= 0){
-                    n = 5;
-                    cout << "Diluar ketentuan! Sistem menggunakan preset 5." << endl;
-                }
-            }
-            else if(o == 6){
-                return 0;
-            }
-            else {
-                cout << "Tidak ada dalam daftar menu. Silahkan ulangi." << endl;
-                goto daftar; 
-            }
+	            gotoxy(79, Batas_atas + 1);
+	            cout << "\tDaftar menu\n\n" 
+	                 << "\t1. 5 huruf" << endl
+	                 << "\t2. 10 huruf" << endl
+	                 << "\t3. 15 huruf" << endl
+	                 << "\t4. 20 huruf" << endl
+	                 << "\t5. Custom" << endl
+	                 << "\t6. Kembali ke menu utama" << endl
+	                 << "\tPilih nomor: ";
+	            cin >> o;
 
 
-            cout << "\nDekripsikan enkripsi berikut." << endl;
-            for (i = 0; i < n; i++) {
-                random = (rand() % 26) + 65;
-                v1.push_back(random);
-                a = random+m;
-                if(a > 90) {
-                    a = a - 26;
-                }
-                else{}
-                cout << a;
-            }
-            cout << "\nKunci: " << m << endl;
+	            if(o == 1)
+	                n = 5;
+	            else if(o == 2)
+	                n = 10;
+	            else if(o == 3)
+	                n = 15;
+	            else if(o == 4)
+	                n = 20;
+	            else if(o == 5){
+	                cout << "\tMasukkan jumlah huruf (antara 1-20): ";
+	                cin >> n;
+
+	                if(n > 20 || n <= 0){
+	                    n = 5;
+	                    cout << "\tDiluar ketentuan! Sistem menggunakan preset 5." << endl;
+	                }
+	            }
+	            else if(o == 6){
+	            	gotoxy(79, Batas_atas + 1);
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+					cout << "\t                                                                                                                                                             " << endl;
+					cout << "\t                                                                                                                                                             " << endl;
+					cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+	                gotoxy(79, Batas_atas + 1);
+	                return 0;
+	            }
+	            else {
+	                cout << "\tTidak ada dalam daftar menu. Silahkan ulangi." << endl;
+	                cout << "\t"; system("pause");
+
+	                gotoxy(79, Batas_atas + 1);
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+	                cout << "\t                                                                                                                                                             " << endl;
+					cout << "\t                                                                                                                                                             " << endl;
+					cout << "\t                                                                                                                                                             " << endl;
+					cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+	                gotoxy(79, Batas_atas + 1);
+	                goto daftar; 
+	            }
 
 
-            cout << "Masukkan jawaban anda (tanpa spasi): ";
-            cin >> b;
-            vector<char>v2(b.begin(),b.end());
-            for(itr = v2.begin(); itr != v2.end(); itr++){
-                if(*itr > 90)
-                    *itr = *itr - 32;
-                else{}
-            }
+	            cout << "\n\tDekripsikan enkripsi berikut." << endl;
+	            cout << "\t";
+
+	            for (i = 0; i < n; i++) {
+	                random = (rand() % 26) + 65;
+	                v1.push_back(random);
+	                a = random+m;
+	                if(a > 90) {
+	                    a = a - 26;
+	                }
+	                else{}
+	                cout << a;
+	            }
+
+	            cout << "\n\tKunci: " << m << endl;
 
 
-            if(v2.size() > v1.size()){
-                cout << "Dekripsi anda melebihi teks. Semoga lebih baik dalam percobaan berikutnya." << endl << endl;
-                goto daftar;
-            }
-            else if(v2.size() < v1.size()){
-                cout << "Dekripsi anda kurang lengkap. Semoga lebih baik dalam percobaan berikutnya." << endl << endl;
-                goto daftar;
-            }
-            else{}
+	            cout << "\tMasukkan jawaban anda (tanpa spasi): ";
+	            cin >> b;
+
+	            vector<char>v2(b.begin(),b.end());
+	            for(itr = v2.begin(); itr != v2.end(); itr++){
+	                if(*itr > 90)
+	                    *itr = *itr - 32;
+	                else{}
+	            }
 
 
-            if(v1 == v2)
-                cout << "Dekripsi berhasil." << endl;
-            else
-                cout << "Dekripsi kurang tepat. Semoga lebih baik dalam percobaan berikutnya." << endl;
+	            if(v2.size() > v1.size()){
+	                cout << "\tDekripsi anda melebihi teks. Semoga lebih baik dalam percobaan berikutnya." << endl << endl;
+	                cout << "\t"; system("pause");
+
+	                gotoxy(79, Batas_atas + 1);
+	                cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+	                gotoxy(79, Batas_atas + 1);
+	                goto daftar;
+	            }
+	            else if(v2.size() < v1.size()){
+	                cout << "\tDekripsi anda kurang lengkap. Semoga lebih baik dalam percobaan berikutnya." << endl << endl;
+	                cout << "\t"; system("pause");
+
+	                gotoxy(79, Batas_atas + 1);
+	                cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+			        cout << "\t                                                                                                                                                             " << endl;
+	                gotoxy(79, Batas_atas + 1);
+	                goto daftar;
+	            }
+	            else{}
+
+
+	            if(v1 == v2)
+	                cout << "\tDekripsi berhasil." << endl;
+	            else
+	                cout << "\tDekripsi kurang tepat. Semoga lebih baik dalam percobaan berikutnya." << endl;
 
 
             for(i = 0; i < n; i++){
                 if(v2[i] == v1[i])
                     ratio++;
             }   
-            cout << "Akurasi: " << (ratio/n)*100 << "%" << endl << endl;
+            cout << "\tAkurasi: " << (ratio/n)*100 << "%" << endl << endl;
+            cout << "\t"; system("pause");
+
+	        gotoxy(79, Batas_atas + 1);
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        cout << "\t                                                                                                                                                             " << endl;
+	        gotoxy(79, Batas_atas + 1);
             goto daftar;
-    }
+    	}
 
 };
 
-
 int main(){
-    system("cls");
-    system("color 06");
-    string oper, pil;
-    float bil1, bil2, hsl;
-    int fitur;
+	system("cls");
+	int i, fitur;
+	Tampilan<int> tmpl;
+	tmpl.printKalkulator();	
+	Kalkulator calc;
+	Sandi snd;
 
-    Welcome *wlc;
-    Rumus<float, string> rms;
-    Sandi snd;
-
-    awal:
-        cout << "\nMenu Utama" << "\n\n" << "Silahkan pilih fitur yang ingin digunakan:" << endl
-        << "1. Kalkulator" << endl
-        << "2. Sandi Caesar" <<endl
-        << "3. Keluar" <<endl
-        << "Masukkan nomor fitur: ";
+	awal:
+		gotoxy(79, Batas_atas + 2);
+		cout << "Menu Utama\n\n"
+        	 << "\tSilahkan pilih fitur yang ingin digunakan:" << endl
+        	 << "\t1. Kalkulator" << endl
+	         << "\t2. Sandi Caesar" <<endl
+	         << "\t3. Keluar" <<endl
+	         << "\tMasukkan nomor fitur: ";
         cin >> fitur;
 
     switch(fitur) {
         case 1 : {
-            cout << endl;   
-            wlc = &rms;
-            wlc -> kalkulator(bil1, bil2, hsl, oper, pil);
+            system("cls");  
+            tmpl.printKalkulator();	 
+            tmpl.printKalkulator(i);
+            gotoxy(0, Batas_atas + 3); calc.hitung();
             goto awal;
         }
         case 2 : {
-            cout << endl;   
+            system("cls");  
+            tmpl.printKalkulator();
+            gotoxy(0, Batas_atas + 1);   
             snd.cypher();
             goto awal;
         }
         case 3 : {
-            cout << endl;
+            system("cls");  
+            tmpl.printKalkulator();
             break;
         }
     }
 
-return 0;
+	return 0;
 }
