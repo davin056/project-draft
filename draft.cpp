@@ -4,18 +4,25 @@
 #include <ctime>
 #include <fstream>
 #include <vector>
+#include <map>
+#include <iterator>
 
 using namespace std;
 
 class Welcome{
     protected :
         string uname;
+        string rate;
 
     public :
-        Welcome(){
-            ofstream operate;
+        map<string,string> teks;
+        map<string,string>::iterator itr;
 
-            operate.open("user.txt");
+        Welcome(){
+
+
+            ofstream operate;
+            operate.open("user.txt", ios::app);
 
             cout << endl;
             cout << "\t\t ----------------------------------------------------------------------------" << endl;
@@ -23,6 +30,7 @@ class Welcome{
             cout << "\t\t ----------------------------------------------------------------------------" << endl;
             cout << "\t\t Silahkan masukkan nama anda : ";
             getline(cin, uname);
+            teks.insert(pair<string, string>(rate, uname));
             system("cls");
 
             if(!operate.fail()){
@@ -32,7 +40,6 @@ class Welcome{
             }
 
             ifstream yourfile;
-
             yourfile.open("user.txt");
 
             cout << "\t\t ----------------------------------------------------------------------------" << endl;
@@ -41,8 +48,13 @@ class Welcome{
         }
 
         ~Welcome(){
-            cout << "\t\t\t\tTerima kasih " << uname << " semoga harimu menyenangkan" << endl;
-            cout << "\t\t ----------------------------------------------------------------------------" << endl;
+          itr = teks.begin();
+           cout << "Beri program kami nilai 1-10: ";
+           cin >> rate;
+           cout << "\t\t\t\tTerima kasih, ";
+           cout << itr->second;
+           cout << ". Semoga harimu menyenangkan" << endl;
+           cout << "\t\t ----------------------------------------------------------------------------" << endl;
             // getch();
         }
 
