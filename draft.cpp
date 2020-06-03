@@ -313,8 +313,8 @@ class Welcome{
 		
 		itr = user.begin();
            	if(!operate.fail()){
-                operate << "Username : " << nama << endl;
-           		operate << "Rating   : " << rate << endl;
+                operate << "\nUsername : " << nama;
+           	operate << "\nRating   : " << rate;
                 operate.close();
                 cout << endl;
             }
