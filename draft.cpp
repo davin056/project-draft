@@ -310,7 +310,7 @@ class Welcome{
            	itr = user.begin();
            	if(!operate.fail()){
                 operate << "Username : " << nama << endl;
-           		operate << "Rating   : " << rate << endl;
+           		operate << "Rating   : " << rate << endl << endl;
                 operate.close();
                 cout << endl;
             }
