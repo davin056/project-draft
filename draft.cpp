@@ -1,13 +1,10 @@
 #include <iostream>
+#include <cmath>
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
-#include <vector>
 #include <map>
-#include <iterator>
-#include <conio.h>
-#include <string>
-#include <cmath>
+#include <vector>
 #include <windows.h>
 
 #define Batas_kiri 3
