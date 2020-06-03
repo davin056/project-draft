@@ -293,9 +293,6 @@ class Welcome{
         map<string,string>::iterator itr;
 
 		Welcome(){
-			ofstream operate;
-            operate.open("user.txt");
-
             for(int i = 7; i <= 160; i++){
 				gotoxy(i, Batas_atas + 1); cout << Border_alas;
 			}
@@ -303,23 +300,27 @@ class Welcome{
 			gotoxy(0, Batas_atas); cout << "\tMasukkan Nama Anda : ";
 			getline(cin, nama);
 			teks.insert(pair<string, string>(rate, nama));
+		}
 
-			if(!operate.fail()){
+		~Welcome(){
+			ofstream operate;
+            operate.open("user.txt");
+
+			gotoxy(0, Batas_atas + 22);
+			itr = teks.begin();
+
+           	gotoxy(0, Batas_atas + 1); cout << "\tSilahkan berikan rating 1-10 : ";
+           	cin >> rate;
+
+           	if(!operate.fail()){
                 operate << "Username : " << nama << endl;
+           		operate << "Rating   : " << rate << endl;
                 operate.close();
                 cout << endl;
             }
 
             ifstream yourfile;
             yourfile.open("user.txt");
-		}
-
-		~Welcome(){
-			gotoxy(0, Batas_atas + 22);
-			itr = teks.begin();
-
-           	gotoxy(0, Batas_atas + 1); cout << "\tSilahkan berikan rating 1-10 : ";
-           	cin >> rate;
 
            	for(int i = 7; i <= 160; i++){
 				gotoxy(i, Batas_atas + 3); cout << Border_alas;
