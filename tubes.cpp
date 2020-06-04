@@ -299,7 +299,7 @@ class Welcome{
 
 		~Welcome(){
 			ofstream operate;
-        	operate.open("user.txt", ios::app); // gunakan file txt baru pada eksekusi perdana
+        	operate.open("user.txt", ios::app); // gunakan file txt kosong
 
 			gotoxy(0, Batas_atas + 22);
 
@@ -328,7 +328,7 @@ class Welcome{
 
             gotoxy(49, Batas_atas + 4); cout << "\tTerima kasih " << itr->second << " semoga harimu menyenangkan." << endl;
             cout << endl << endl << '\t';
-            system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
+            system("pause");
         }
 
         virtual int hitung() = 0;
@@ -346,18 +346,27 @@ class Kalkulator : public Welcome{
         }
 
         void Bilangan1(){
-            cout << "\t\t\t\t\t\t    Bilangan     = ";
-            cin >> bil1;
+            while(cout << "\t\t\t\t\t\t    Bilangan     = " && !(cin >> bil1)){
+            	cin.clear();
+            	cin.ignore();
+            	cout << "\t\t\t\t\t\t    Harap memasukkan angka." << endl;
+            }
         }
 
         void Bilangan2(){
-            cout << "\t\t\t\t\t\t    Bilangan     = ";
-            cin >> bil2;
+        	while(cout << "\t\t\t\t\t\t    Bilangan     = " && !(cin >> bil2)){
+            	cin.clear();
+            	cin.ignore();
+            	cout << "\t\t\t\t\t\t    Harap memasukkan angka." << endl;
+            }
         }
 
         void Radian(){
-            cout << "\t\t\t\t\t\t    Radian       = ";
-            cin >> bil2;
+        	while(cout << "\t\t\t\t\t\t    Radian       = " && !(cin >> bil2)){
+            	cin.clear();
+            	cin.ignore();
+            	cout << "\t\t\t\t\t\t    Harap memasukkan angka." << endl;
+            }
         }
 
         void Tanya(){
@@ -592,7 +601,7 @@ class Kalkulator : public Welcome{
 
                 gotoxy(0, Batas_atas + 4);
                 cout << "\t\t\t\t\t\t    Hasil Akhir  = Tak Hingga" << endl << endl;
-                cout << "\t\t\t\t\t\t    ";system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
+                cout << "\t\t\t\t\t\t    "; system("pause");
 
                 gotoxy(0, Batas_atas);
                 cout << "                                                                                                                                                                                                                                                      " << endl;
@@ -648,7 +657,7 @@ class Sandi {
 	                 << "\t4. 20 huruf" << endl
 	                 << "\t5. Custom" << endl
 	                 << "\t6. Kembali ke menu utama" << endl
-	                 << "\tPilih nomor: ";
+	                 << "\tPilih nomor : ";
 	            cin >> o;
 
 
@@ -661,7 +670,7 @@ class Sandi {
 	            else if(o == 4)
 	                n = 20;
 	            else if(o == 5){
-	                cout << "\tMasukkan jumlah huruf (antara 1-20): ";
+	                cout << "\tMasukkan jumlah huruf (antara 1-20) : ";
 	                cin >> n;
 
 	                if(n > 20 || n <= 0){
@@ -701,7 +710,7 @@ class Sandi {
 	            }
 	            else {
 	                cout << "\tTidak ada dalam daftar menu. Silahkan ulangi." << endl << endl;
-	                cout << "\t"; system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
+	                cout << "\t"; system("pause");
 
 	                gotoxy(79, Batas_atas + 1);
 	                cout << "\t                                                                                                                                                             " << endl;
@@ -751,7 +760,7 @@ class Sandi {
 	            cout << "\n\tKunci: " << m << endl;
 
 
-	            cout << "\tMasukkan jawaban anda (tanpa spasi): ";
+	            cout << "\tMasukkan jawaban anda (tanpa spasi) : ";
 	            cin >> b;
 
 	            vector<char>v2(b.begin(),b.end());
@@ -764,12 +773,12 @@ class Sandi {
 
 	            if(v2.size() > v1.size()){
 	                cout << "\tDekripsi anda melebihi teks. Semoga lebih baik dalam percobaan berikutnya." << endl;
-	                cout << "\tJawaban yang benar: ";
+	                cout << "\tJawaban yang benar : ";
 	                for(itr = v1.begin(); itr != v1.end(); itr++){
 	                	cout << *itr;
 	            	}
 	            	cout << endl << endl;
-	                cout << "\t"; system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
+	                cout << "\t"; system("pause");
 
 	                gotoxy(79, Batas_atas + 1);
 	                cout << "\t                                                                                                                                                             " << endl;
@@ -802,12 +811,12 @@ class Sandi {
 	            }
 	            else if(v2.size() < v1.size()){
 	                cout << "\tDekripsi anda kurang lengkap. Semoga lebih baik dalam percobaan berikutnya." << endl;
-	                cout << "\tJawaban yang benar: ";
+	                cout << "\tJawaban yang benar : ";
 	                for(itr = v1.begin(); itr != v1.end(); itr++){
 	                	cout << *itr;
 	            	}
 	            	cout << endl << endl;
-	                cout << "\t"; system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
+	                cout << "\t"; system("pause");
 
 	                gotoxy(79, Batas_atas + 1);
 	                cout << "\t                                                                                                                                                             " << endl;
@@ -845,7 +854,7 @@ class Sandi {
 	                cout << "\tDekripsi berhasil." << endl;
 	            else{
 	                cout << "\tDekripsi kurang tepat. Semoga lebih baik dalam percobaan berikutnya." << endl;
-	                cout << "\tJawaban yang benar: ";
+	                cout << "\tJawaban yang benar : ";
 	                for(itr = v1.begin(); itr != v1.end(); itr++){
 	                	cout << *itr;
 	            	}
@@ -858,7 +867,7 @@ class Sandi {
                     ratio++;
             }   
             cout << "\tAkurasi: " << (ratio/n)*100 << "%" << endl << endl;
-            cout << "\t"; system("pause >nul | echo Tekan apa saja untuk melanjutkan !");
+            cout << "\t"; system("pause");
 
 	        gotoxy(79, Batas_atas + 1);
 	        cout << "\t                                                                                                                                                             " << endl;
@@ -897,7 +906,6 @@ int main(){
 	int i, fitur;
 	Tampilan<int> tmpl;
 	tmpl.printKalkulator();
-	Welcome *wlc;
 	Kalkulator calc;
 	Sandi snd;
 
@@ -918,8 +926,7 @@ int main(){
             tmpl.printKalkulator();	 
             tmpl.printKalkulator(i);
             gotoxy(0, Batas_atas + 3); 
-            wlc = &calc;    
-	    wlc -> hitung();
+            calc.hitung();
             system("cls");
             goto awal;
         }
